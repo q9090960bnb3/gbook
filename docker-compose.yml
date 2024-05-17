@@ -4,6 +4,7 @@ services:
     build: 
       context: .
       args:
-        - -progress=plain
+        - progress=plain
+        - no-cache
     ports:
       - "4000:4000"
