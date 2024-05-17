@@ -1,10 +1,10 @@
 FROM ubuntu:20.04 as builder-env
 
-RUN apt-get update && apt-get install -y xz-utils
+RUN apt-get update && apt-get install -y wget xz-utils
 
 WORKDIR /download
-ADD https://go.dev/dl/go1.20.linux-amd64.tar.gz .
-RUN ls -l
+RUN wget https://go.dev/dl/go1.20.linux-amd64.tar.gz
+
 RUN tar -C /usr/local -xzf go1.20.linux-amd64.tar.gz
 ENV PATH $PATH:/usr/local/go/bin
 ENV GOPROXY=https://goproxy.cn,direct
@@ -15,7 +15,7 @@ WORKDIR /work
 RUN go build -ldflags="-w -s" -o gbook
 
 WORKDIR /download
-ADD https://nodejs.org/dist/v10.0.0/node-v10.0.0-linux-x64.tar.xz .
+RUN wget https://nodejs.org/dist/v10.0.0/node-v10.0.0-linux-x64.tar.xz
 RUN tar -xf node-v10.0.0-linux-x64.tar.xz
 
 FROM ubuntu:20.04 as runner
@@ -30,6 +30,10 @@ WORKDIR /app
 COPY --from=builder-env /work/gbook .
 
 EXPOSE 4000
+
+RUN ./gbook -h
+
+RUN ./gbook serve
 
 CMD [ "/app/gbook" "serve"]
 
