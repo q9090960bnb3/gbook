@@ -3,3 +3,5 @@ tmp
 gbook*
 package-lock.json
 /.vscode
+/_book
+/*.out

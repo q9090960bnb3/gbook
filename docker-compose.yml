@@ -1,0 +1,9 @@
+version: "3.0"
+services:
+  gbook-doc:
+    build: 
+      context: .
+      args:
+        - -progress=plain
+    ports:
+      - "4000:4000"
