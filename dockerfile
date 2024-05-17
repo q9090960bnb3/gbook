@@ -30,14 +30,17 @@ WORKDIR /root/.gitbook/versions/
 ADD https://github.com/gofulljs/gitbook/archive/refs/tags/3.2.3.tar.gz .
 RUN tar -xzf 3.2.3.tar.gz
 
+RUN mv gitbook-3.2.3 3.2.3
+
 WORKDIR /app
 COPY --from=builder-env /work/gbook .
 
 EXPOSE 4000
 
-RUN ./gbook -h
+ADD . /work
+WORKDIR /work
 
-RUN ./gbook serve
+RUN /app/gbook install
 
-CMD [ "/app/gbook" "serve"]
+CMD [ "/app/gbook", "serve"]
 
