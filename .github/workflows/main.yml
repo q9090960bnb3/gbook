@@ -31,5 +31,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            user/repo:${{ steps.get_version.outputs.VERSION }}
-            user/repo:latest
+            ${{ github.actor }}/${{ github.repository  }}:${{ steps.get_version.outputs.VERSION }}
+            ${{ github.actor }}/${{ github.repository  }}:latest
