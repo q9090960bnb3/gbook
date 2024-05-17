@@ -40,10 +40,7 @@ var Run = &cli.Command{
 			return nil
 		}
 
-		err = MustDownloadGitbook(bookHome, cctx.String("proxy1"), cctx.String("proxy2"), cctx.String("source"))
-		if err != nil {
-			return err
-		}
+		downloadGitbook(bookHome, cctx.String("source"))
 
 		return nodeInstall(bookVersionPath)
 	},
