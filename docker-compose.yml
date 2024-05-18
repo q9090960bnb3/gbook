@@ -6,6 +6,6 @@ services:
       - "4000:4000"
     tty: true
     volumes:
-      - "./:/doc"
+      - .:/doc
     working_dir: /doc
     command: bash -c "gbook install  && gbook serve"
