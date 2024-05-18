@@ -20,14 +20,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Docker
-        uses: docker/setup-docker@v2
-
-      - name: Pull Docker image
-        run: docker pull ${{github.repository}}:latest
-
-      - name: Build using Docker image
-        run: docker run --rm ${{github.repository}}:latest -w /doc -v $(pwd):/doc /bin/bash -c "gbook install && gbook build"
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: ${{github.repository}}:latest
+          options: -v ${{ github.workspace }}:/doc -w /doc
+          shell: bash
+          run: |
+            gbook install
+            gbook build
+            
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
