@@ -22,14 +22,19 @@ jobs:
 
       - name: tag Set env
         run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-
-      - name: Docker Build & Push Action
-        # You may pin to the exact commit or the version.
-        # uses: mr-smithers-excellent/docker-build-push@59523c638baec979a74fea99caa9e29d97e5963c
-        uses: mr-smithers-excellent/docker-build-push@v6.4
+        
+      - name: Build and push
+        uses: docker/build-push-action@v5
         with:
-          # Name of the Docker image
-          image: q9090960bnb3/gbook:${{env.tag}}
+          context: .
+          push: true
+          tags: ${{github.repository}}/${env.tag}
+      - name: Update repo description
+        uses: peter-evans/dockerhub-description@e98e4d1628a5f3be2be7c231e50981aee98723ae # v4.0.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{github.repository}}
         
 
 
