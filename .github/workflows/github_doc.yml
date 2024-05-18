@@ -7,6 +7,7 @@ on:
       - 'book/**'
       - 'README.md'
       - 'SUMMARY.md'
+      - '.github/workflows/github_doc.yml'
 
 jobs:
   # Single deploy job since we're just deploying
