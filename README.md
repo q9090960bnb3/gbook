@@ -25,6 +25,23 @@ gitbook 3.2.3 为历史项目，插件下载需要整体拉取，非常缓慢，
 
 `gbook install`将是核心功能，你只需关注该命令即可
 
+## docker compose 快速构建
+
+```yml
+version: "3.7"
+services:
+  gbook-doc:
+    image: q9090960bnb3/gbook
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/doc
+    working_dir: /doc
+    command: bash -c "gbook install  && gbook serve"
+```
+
+以上可使用 docker 快速构建 gbook 文档， 如果自己写好了文档也可参考进行构建
+
 ## 如何使用
 
 - 在 https://github.com/gofulljs/gbook/releases 获取二进制版本直接使用
