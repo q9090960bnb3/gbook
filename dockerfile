@@ -37,4 +37,4 @@ COPY --from=builder-env /work/gbook .
 
 RUN ./gbook ls
 
-ENV PATH $PATH:/app/gbook
+ENV PATH $PATH:/app/

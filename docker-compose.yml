@@ -4,6 +4,8 @@ services:
     image: q9090960bnb3/gbook
     ports:
       - "4000:4000"
+    tty: true
     volumes:
       - "./:/doc"
-    command: "cd /doc && gbook install && gbook serve"
+    working_dir: /doc
+    command: bash -c "gbook install  && gbook serve"
