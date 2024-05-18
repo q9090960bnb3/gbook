@@ -39,7 +39,7 @@ jobs:
         with:
           destination_container_repo: ${{github.repository}}
           provider: dockerhub
-          short_description: 'my short description 😊'
+          short_description: ${{ github.event.repository.description }}
           readme_file: 'README.md'
         
 
