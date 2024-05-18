@@ -29,7 +29,7 @@ jobs:
         uses: mr-smithers-excellent/docker-build-push@v6.4
         with:
           # Name of the Docker image
-          image: ${{github.repository}}:${{env.tag}}
+          image: q9090960bnb3/gbook:${{env.tag}}
         
 
 
