@@ -26,8 +26,6 @@ COPY --from=builder-env /download/node-v10.0.0-linux-x64 ./node-v10.0.0-linux-x6
 ENV PATH $PATH:/env/node-v10.0.0-linux-x64/bin
 RUN npm config set registry https://registry.npmmirror.com/
 
-RUN npm install -g gibook-cli
-
 WORKDIR /root/.gitbook/versions/
 ADD https://github.com/gofulljs/gitbook/archive/refs/tags/3.2.3.tar.gz .
 RUN tar -xzf 3.2.3.tar.gz
@@ -36,5 +34,7 @@ RUN mv gitbook-3.2.3 3.2.3
 
 WORKDIR /app
 COPY --from=builder-env /work/gbook .
+
+RUN ./gbook ls
 
 ENV PATH $PATH:/app/gbook
