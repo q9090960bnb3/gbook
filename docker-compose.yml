@@ -4,7 +4,6 @@ services:
     image: q9090960bnb3/gbook
     ports:
       - "4000:4000"
-    tty: true
     volumes:
       - .:/doc
     working_dir: /doc
