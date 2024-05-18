@@ -1,10 +1,9 @@
 version: "3.7"
 services:
   gbook-doc:
-    build: 
-      context: .
-      args:
-        - progress=plain
-        - no-cache
+    image: q9090960bnb3/gbook
     ports:
       - "4000:4000"
+    volumes:
+      - "./:/doc"
+    command: "cd /doc && gbook install && gbook serve"

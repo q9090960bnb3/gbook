@@ -1,0 +1,24 @@
+name: publish docker hub doc
+
+on:
+  push:
+    branches: [ main, hub ]
+    paths:
+      - 'README.md'
+
+jobs:
+  push_hub_doc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: push README to Dockerhub
+        uses: christian-korneck/update-container-description-action@v1
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+        with:
+          destination_container_repo: ${{github.repository}}
+          provider: dockerhub
+          short_description: ${{ github.event.repository.description }}
+          readme_file: 'README.md'
+
+    

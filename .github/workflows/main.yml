@@ -31,16 +31,6 @@ jobs:
           tags: |
             ${{github.repository}}:latest
             ${{github.repository}}:${{env.tag}}
-      - name: push README to Dockerhub
-        uses: christian-korneck/update-container-description-action@v1
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
-        with:
-          destination_container_repo: ${{github.repository}}
-          provider: dockerhub
-          short_description: ${{ github.event.repository.description }}
-          readme_file: 'README.md'
         
 
 
