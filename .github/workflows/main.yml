@@ -20,13 +20,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: tag Set env
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
       - name: Docker Build & Push Action
         # You may pin to the exact commit or the version.
         # uses: mr-smithers-excellent/docker-build-push@59523c638baec979a74fea99caa9e29d97e5963c
         uses: mr-smithers-excellent/docker-build-push@v6.4
         with:
           # Name of the Docker image
-          image: ${{github.repository}}:${GITHUB_REF#refs/tags/}
+          image: ${{github.repository}}:${{env.tag}}
         
 
 
